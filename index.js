@@ -64,7 +64,7 @@ function knightMoves(square1, square2) {
 }
 
 function printMoves(sequence) {
-  console.log(`Made it in ${sequence.length} moves! Here is your path:`);
+  console.log(`Made it in ${sequence.length - 1} moves! Here is your path:`);
   for (const array of sequence) {
     console.log(array);
   }
