@@ -1,14 +1,3 @@
-// class Square {
-//   constructor(x, y) {
-//     this.x = x;
-//     this.y = y;
-//     this.moves = [];
-//   }
-//   calcMoves() {
-//     this.x;
-//   }
-// }
-
 function createSquares() {
   const array = [];
   for (let i = 0; i < 8; i++) {
@@ -71,7 +60,7 @@ function BFSsquares(square1, square2) {
         console.log("not gonna repeat!!!");
       } else {
         visited.add(move.toString());
-        q.push([[...currentSeq, move]]);
+        q.push([...currentSeq, move]);
       }
 
       if (move.toString() === square2.toString()) {
@@ -83,40 +72,7 @@ function BFSsquares(square1, square2) {
   }
 }
 
-function BFSsquaresNew(square1, square2) {
-  const q = [square1];
-
-  const visited = new Set();
-
-  while (q.length > 0) {
-    const currentSquare = q.shift();
-    console.log("current square ", currentSquare);
-
-    const square1Moves = createMoves(currentSquare);
-
-    for (const move of square1Moves) {
-      console.log("move is ", move);
-      console.log("visited is ", visited);
-
-      if (visited.has(move.toString())) {
-        console.log("not gonna repeat!!!");
-      } else {
-        visited.add(move.toString());
-        q.push(move);
-      }
-
-      if (move.toString() === square2.toString()) {
-        console.log("-----found------");
-        // console.table(currentSeq);
-        return;
-      }
-    }
-  }
-}
-
-console.log(squaresArray);
-BFSsquares([0, 0], [1, 7]);
-// BFSsquaresNew([0, 0], [1, 7]);
+BFSsquares([0, 0], [1, 3]);
 
 // const newArr = [12, [12]];
 // newArr.push([...additions, [12, 12]]);
