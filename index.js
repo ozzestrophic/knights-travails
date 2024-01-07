@@ -43,36 +43,33 @@ function BFSsquares(square1, square2) {
   const visited = new Set();
 
   while (q.length > 0) {
-    console.log("q", q);
-
     const currentSeq = q.shift();
     console.log("looping seq", currentSeq);
     const currentSquare = currentSeq[currentSeq.length - 1];
     console.log("current square ", currentSquare);
+    visited.add(currentSquare.toString());
 
     const square1Moves = createMoves(currentSquare);
 
     for (const move of square1Moves) {
       console.log("move is ", move);
-      console.log("visited is ", visited);
 
-      if (visited.has(move.toString())) {
-        console.log("not gonna repeat!!!");
-      } else {
-        visited.add(move.toString());
+      if (!visited.has(move.toString())) {
         q.push([...currentSeq, move]);
+        console.log("looping ----");
       }
 
       if (move.toString() === square2.toString()) {
-        console.log("-----found------");
-        console.table(currentSeq);
-        return;
+        currentSeq.push(square2);
+        console.log(`found in ${currentSeq.length} moves`);
+        console.log(currentSeq);
+        return currentSeq;
       }
     }
   }
 }
 
-BFSsquares([0, 0], [1, 3]);
+BFSsquares([0, 0], [1, 4]);
 
 // const newArr = [12, [12]];
 // newArr.push([...additions, [12, 12]]);
