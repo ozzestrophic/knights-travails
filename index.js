@@ -51,27 +51,74 @@ function createMoves(square) {
 function BFSsquares(square1, square2) {
   const q = [[square1]];
 
-  while (q.length > 0) {
-    const currentSeq = q.shift();
-    const currentSquare = currentSeq[currentSeq.length - 1];
+  const visited = new Set();
 
-    const visited = new Set();
+  while (q.length > 0) {
+    console.log("q", q);
+
+    const currentSeq = q.shift();
+    console.log("looping seq", currentSeq);
+    const currentSquare = currentSeq[currentSeq.length - 1];
+    console.log("current square ", currentSquare);
+
     const square1Moves = createMoves(currentSquare);
 
     for (const move of square1Moves) {
-      visited.add(move);
-      if (!visited.has(move)) {
-        console.log("adding");
-        q.push([...currentSeq, move]);
+      console.log("move is ", move);
+      console.log("visited is ", visited);
+
+      if (visited.has(move.toString())) {
+        console.log("not gonna repeat!!!");
+      } else {
+        visited.add(move.toString());
+        q.push([[...currentSeq, move]]);
       }
+
       if (move.toString() === square2.toString()) {
-        console.log("found");
+        console.log("-----found------");
+        console.table(currentSeq);
+        return;
       }
-      console.log("q", q);
     }
-    console.log("visited is ", visited);
+  }
+}
+
+function BFSsquaresNew(square1, square2) {
+  const q = [square1];
+
+  const visited = new Set();
+
+  while (q.length > 0) {
+    const currentSquare = q.shift();
+    console.log("current square ", currentSquare);
+
+    const square1Moves = createMoves(currentSquare);
+
+    for (const move of square1Moves) {
+      console.log("move is ", move);
+      console.log("visited is ", visited);
+
+      if (visited.has(move.toString())) {
+        console.log("not gonna repeat!!!");
+      } else {
+        visited.add(move.toString());
+        q.push(move);
+      }
+
+      if (move.toString() === square2.toString()) {
+        console.log("-----found------");
+        // console.table(currentSeq);
+        return;
+      }
+    }
   }
 }
 
 console.log(squaresArray);
-BFSsquares([0, 0], [1, 3]);
+BFSsquares([0, 0], [1, 7]);
+// BFSsquaresNew([0, 0], [1, 7]);
+
+// const newArr = [12, [12]];
+// newArr.push([...additions, [12, 12]]);
+
+// console.table(newArr);
